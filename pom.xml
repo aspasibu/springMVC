@@ -9,6 +9,9 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>3.2.16.RELEASE</spring.version>
+		<spring.data>1.3.4.RELEASE</spring.data>
+		<hb.manager>4.2.5.Final</hb.manager>
+		<postgersql.version>9.3-1102-jdbc41</postgersql.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,6 +31,12 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring.data}</version>
+        </dependency>
 
 
 		<dependency>
@@ -40,6 +49,19 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>				
+ 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hb.manager}</version>
+        </dependency>
+        
+        <!-- postgresql -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgersql.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
