@@ -17,13 +17,15 @@ import javax.persistence.SequenceGenerator;
  * 
  *         Describes post entity
  */
-
 @Entity
 @SequenceGenerator(name = "post_gen", sequenceName = "post_seq", initialValue = 1)
 public class Post {
 
+	public Post() {
+	}
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_gen")
 	@Column(nullable = false)
 	private Long id;
 
@@ -36,7 +38,6 @@ public class Post {
 	@Column
 	private Date date;
 
-	@Column
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false, name = "user_id")
 	private User user;

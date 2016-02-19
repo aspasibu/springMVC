@@ -1,8 +1,7 @@
 package org.aspasibu.springmvc.controller;
 
-import java.util.List;
-
 import org.aspasibu.springmvc.entity.User;
+import org.aspasibu.springmvc.service.PostService;
 import org.aspasibu.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,29 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/users")
-public class IndexController {
+@RequestMapping(value = "/")
+public class PostController {
+
+	@Autowired
+	private PostService postService;
 
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showIndex(String user, Model model) {
+	public String showPosts(String username, Model model) {
 
-		List<User> users = userService.getUsers();
-		model.addAttribute("users", users);
-		return "users";
+		User user = userService.getUserByName(username);
+
+		model.addAttribute("posts", postService.getPostsByUser(user));
+
+		return "posts";
 	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String showAddUserView() {
-		return "addUser";
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(User user) {
-		userService.addUser(user);
-		return "redirect:/users/";
-	}
-
 }
