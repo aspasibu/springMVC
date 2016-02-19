@@ -9,7 +9,7 @@
 </head>
 <body>	
     <div>
-    <a href="add">Add new user</a>
+    <a href="users/add">Add new user</a>
     </div>
     <div>
 	<c:forEach items="${users}" var="user" >
