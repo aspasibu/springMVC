@@ -14,4 +14,6 @@ public interface PostService {
 	public List<Post> getPostsByUserName(String username);
 
 	public Post getPostById(Long id);
+
+	public List<Post> getAllPosts();
 }

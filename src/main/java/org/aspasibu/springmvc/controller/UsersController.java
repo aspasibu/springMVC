@@ -22,7 +22,7 @@ public class UsersController {
 
 		List<User> users = userService.getUsers();
 		model.addAttribute("users", users);
-		return "users";
+		return "views/users.jsp";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

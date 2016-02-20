@@ -26,4 +26,9 @@ public class PostController {
 	public @ResponseBody List<Post> getPosts(@PathVariable String username) {
 		return postService.getPostsByUserName(username);
 	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody List<Post> getPosts() {
+		return postService.getAllPosts();
+	}
 }
