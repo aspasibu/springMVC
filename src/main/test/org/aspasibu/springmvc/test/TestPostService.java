@@ -51,15 +51,15 @@ public class TestPostService extends TestCase {
 	}
 
 	public void testGetPostsByUser() {
-		expect(postRepository.getPostsByUser(user)).andReturn(listPost);
+		expect(postRepository.findByUserUsername("")).andReturn(listPost);
 		replay(postRepository);
 
-		assertEquals("list of posts", postService.getPostsByUser(user), listPost);
+		assertEquals("list of posts", postService.getPostsByUserName(""), listPost);
 		verify(postRepository);
 	}
 
 	public void testGetPostById() {
-		expect(postRepository.getPostsById((long) 1)).andReturn(post);
+		expect(postRepository.findOne((long) 1)).andReturn(post);
 
 		replay(postRepository);
 

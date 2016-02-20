@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author aspasibu
  * 
@@ -32,12 +34,11 @@ public class Post {
 	@Column(nullable = false)
 	private String title;
 
-	@Column
 	private String text;
 
-	@Column
 	private Date date;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false, name = "user_id")
 	private User user;

@@ -3,7 +3,6 @@ package org.aspasibu.springmvc.service.impl;
 import java.util.List;
 
 import org.aspasibu.springmvc.entity.Post;
-import org.aspasibu.springmvc.entity.User;
 import org.aspasibu.springmvc.repository.PostRepository;
 import org.aspasibu.springmvc.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +30,13 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> getPostsByUser(User user) {
-		return postRepository.getPostsByUser(user);
+	public List<Post> getPostsByUserName(String username) {
+		return postRepository.findByUserUsername(username);
 	}
 
 	@Override
 	public Post getPostById(Long id) {
-		return postRepository.getPostsById(id);
+		return postRepository.findOne(id);
 	}
 
 }

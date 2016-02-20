@@ -3,7 +3,6 @@ package org.aspasibu.springmvc.service;
 import java.util.List;
 
 import org.aspasibu.springmvc.entity.Post;
-import org.aspasibu.springmvc.entity.User;
 
 public interface PostService {
 	public Post addPost(Post post);
@@ -12,7 +11,7 @@ public interface PostService {
 
 	public void deletePost(Long id);
 
-	public List<Post> getPostsByUser(User user);
+	public List<Post> getPostsByUserName(String username);
 
 	public Post getPostById(Long id);
 }

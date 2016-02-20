@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author aspasibu
  *
@@ -29,16 +31,15 @@ public class User {
 	@Column(nullable = false, unique = true)
 	private String username;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 
 	@Column(nullable = false, unique = true)
 	private String email;
 
-	@Column
 	private String firstName;
 
-	@Column
 	private String lastName;
 
 	/**
