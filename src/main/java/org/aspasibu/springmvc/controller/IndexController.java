@@ -9,7 +9,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showIndex() {
-		return "index.html";
+		return "users";
 	}
 
 }
