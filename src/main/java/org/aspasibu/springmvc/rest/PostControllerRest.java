@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value = "posts")
-public class PostController {
+@RequestMapping(value = "api/posts")
+public class PostControllerRest {
 
 	@Autowired
 	private PostService postService;

@@ -9,7 +9,8 @@
 <body>
 	<h3>Add new user here:</h3>
 	<form action="add" method="post">
-	<table>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<table>	
 	<tr><td>Username:</td><td> <input type="text" name="username"></td></tr>
 	<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
 	<tr><td>email:</td><td> <input type="text" name="email"></td></tr>
