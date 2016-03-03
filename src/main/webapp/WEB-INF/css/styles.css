@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+fieldset{
+   border: solid 2px blue;  
+   float:left;
+}
+
+#content {
+   width: 80%;   
+   overflow:hidden;
+   border: solid 2px purple;
+   padding: 1em;
+}

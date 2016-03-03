@@ -7,7 +7,9 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.spring3.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring3.SpringTemplateEngine;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @EnableWebMvc
 @Configuration
@@ -28,12 +30,27 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	 */
 
 	@Bean
-	public SpringResourceTemplateResolver configureViewResolver() {
-		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-		templateResolver.setSuffix(".html");
-		templateResolver.setPrefix("/WEB-INF/");
-		templateResolver.setTemplateMode("HTML5");
-		return templateResolver;
+	public ServletContextTemplateResolver templateResolver() {
+		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
+		resolver.setPrefix("/WEB-INF/");
+		resolver.setSuffix(".html");
+		resolver.setTemplateMode("HTML5");
+		resolver.setOrder(1);
+		return resolver;
+	}
+
+	@Bean
+	public SpringTemplateEngine templateEngine() {
+		SpringTemplateEngine engine = new SpringTemplateEngine();
+		engine.setTemplateResolver(templateResolver());
+		return engine;
+	}
+
+	@Bean
+	public ThymeleafViewResolver thymeleafViewResolver() {
+		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+		resolver.setTemplateEngine(templateEngine());
+		return resolver;
 	}
 
 	@Override

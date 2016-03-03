@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>spring mvc app</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="resources/css/styles.css"/>
+</head>
+
+<body>
+
+	<div id="header">
+		<h3>simple spring mvc application</h3>
+	</div>
+
+	<div id="login"></div>
+
+	<div id="content">
+		<h4>Post list:</h4>
+		<fieldset th:each="post : ${posts}">
+			<legend th:text="${post.title}">Title here <a href="#" th:href="@{/posts/remove(id=${post.id})}">Remove</a></legend>
+			<textarea rows="10" cols="30" th:text="${post.text}">Body Text</textarea>
+			
+		</fieldset>
+	</div>
+
+	<div id="footer">
+		<p>2016 (c)</p>
+	</div>
+
+</body>
+
+</html>
