@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring3.templateresolver.SpringResourceTemplateResolver;
 
 @EnableWebMvc
 @Configuration
@@ -20,12 +20,20 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/");
 	}
 
+	/*
+	 * @Bean public InternalResourceViewResolver configureViewResolver() {
+	 * InternalResourceViewResolver resolver = new
+	 * InternalResourceViewResolver(); resolver.setPrefix("/WEB-INF/views/");
+	 * resolver.setSuffix(".jsp"); return resolver; }
+	 */
+
 	@Bean
-	public InternalResourceViewResolver configureViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		return resolver;
+	public SpringResourceTemplateResolver configureViewResolver() {
+		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setSuffix(".html");
+		templateResolver.setPrefix("/WEB-INF/");
+		templateResolver.setTemplateMode("HTML5");
+		return templateResolver;
 	}
 
 	@Override

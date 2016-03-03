@@ -19,7 +19,7 @@ public class PostController {
 	@Autowired
 	private PostService postService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/post", method = RequestMethod.GET)
 	public String showIndex(Model model) {
 		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
@@ -34,7 +34,7 @@ public class PostController {
 			postService.addPost(post);
 		}
 
-		return "redirect:/";
+		return "redirect:/post";
 	}
 
 }
