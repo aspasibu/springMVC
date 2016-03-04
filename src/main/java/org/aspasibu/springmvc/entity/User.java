@@ -1,5 +1,7 @@
 package org.aspasibu.springmvc.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Table(name = "users")
 @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", initialValue = 1)
 
-public class User {
+public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2343765757495229974L;
 
 	public User() {
 	}

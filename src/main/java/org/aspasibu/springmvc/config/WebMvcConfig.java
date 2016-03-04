@@ -1,5 +1,8 @@
 package org.aspasibu.springmvc.config;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -43,6 +48,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine engine = new SpringTemplateEngine();
 		engine.setTemplateResolver(templateResolver());
+		Set<IDialect> dialect = new HashSet<>();
+		dialect.add(new SpringSecurityDialect());
+		engine.setAdditionalDialects(dialect);
 		return engine;
 	}
 

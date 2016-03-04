@@ -10,22 +10,31 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/post")
 public class PostController {
 
 	@Autowired
 	private PostService postService;
 
-	@RequestMapping(value = "/post", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String showIndex(Model model) {
 		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
 
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+	public String deletePost(@PathVariable Long id) {
+		postService.deletePost(id);
+
+		return "redirect:/post";
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
 	public String addPost(Post post, @AuthenticationPrincipal UserDetails authUser) {
 
 		if (authUser instanceof SecurityUser) {
