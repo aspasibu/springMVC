@@ -14,14 +14,19 @@
 	<div id="header">
 		<h3>simple spring mvc application</h3>
 	</div>
-
-	<div id="login"></div>
+	
+	<div th:include="login :: #login-form">
+	<!-- <input type="text" placeholder="login"/>
+	<input type="password" placeholder="password"/>
+	<input type="button" onclick="#"/>  --> 
+	</div>
 
 	<div id="content">
 		<h4>Post list:</h4>
 		<fieldset th:each="post : ${posts}">
-			<legend th:text="${post.title}">Title here <a href="#" th:href="@{/posts/remove(id=${post.id})}">Remove</a></legend>
+			<legend th:text="${post.title}">Title here </legend>
 			<textarea rows="10" cols="30" th:text="${post.text}">Body Text</textarea>
+			<a href="#" th:href="@{/post/remove/{id}(id=${post.id})}">Remove</a>
 			
 		</fieldset>
 	</div>

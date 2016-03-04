@@ -40,8 +40,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/**").access("hasRole('ROLE_ADMIN')").and().formLogin()
-				.defaultSuccessUrl("/", false);
+		http.formLogin().defaultSuccessUrl("/", false).and().logout().logoutSuccessUrl("/").logoutUrl("/logout");
 
 	}
 

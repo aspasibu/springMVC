@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Login page</title>
+</head>
+<body>
+	<div id="login-form">
+		<p th:if="${loginError}">Wrong user or password</p>
+		<form sec:authorize="!hasRole('ROLE_ADMIN')" th:action="@{/login}"
+			method="post">
+			<input type="text" placeholder="username" id="j_username"
+				name="username" /> <input type="password" placeholder="password"
+				id="j_password" name="password" /> <input type="submit"
+				value="Log in" />
+		</form>
+		<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{/logout}" method="post">
+			Logged user: <span sec:authentication="name">user</span> <br />
+			 <input type="submit" value="Log out" />
+		</form>
+	</div>
+
+</body>
+</html>
