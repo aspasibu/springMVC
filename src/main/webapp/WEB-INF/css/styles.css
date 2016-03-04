@@ -1,13 +1,17 @@
 @CHARSET "ISO-8859-1";
 
 fieldset{
-   border: solid 2px blue;  
-   float:left;
+   border: solid 2px blue;     
 }
 
 #content {
-   width: 80%;   
+   width: 50%;   
    overflow:hidden;
    border: solid 2px purple;
    padding: 1em;
+}
+
+#login-form {
+	float:right;
+	margin-right: 100px;
 }
