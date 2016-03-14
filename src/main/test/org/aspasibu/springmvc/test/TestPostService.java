@@ -22,7 +22,6 @@ public class TestPostService extends TestCase {
 
 	private PostRepository postRepository;
 	private PostService postService;
-	private User user;
 	private Post post;
 	private List<Post> listPost = new ArrayList<>();
 

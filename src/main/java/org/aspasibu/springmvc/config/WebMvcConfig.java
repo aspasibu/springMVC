@@ -1,5 +1,8 @@
 package org.aspasibu.springmvc.config;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +10,11 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.dialect.IDialect;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring3.SpringTemplateEngine;
+import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @EnableWebMvc
 @Configuration
@@ -20,11 +27,37 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/");
 	}
 
+	/*
+	 * @Bean public InternalResourceViewResolver configureViewResolver() {
+	 * InternalResourceViewResolver resolver = new
+	 * InternalResourceViewResolver(); resolver.setPrefix("/WEB-INF/views/");
+	 * resolver.setSuffix(".jsp"); return resolver; }
+	 */
+
 	@Bean
-	public InternalResourceViewResolver configureViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
+	public ServletContextTemplateResolver templateResolver() {
+		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
+		resolver.setPrefix("/WEB-INF/");
+		resolver.setSuffix(".html");
+		resolver.setTemplateMode("HTML5");
+		resolver.setOrder(1);
+		return resolver;
+	}
+
+	@Bean
+	public SpringTemplateEngine templateEngine() {
+		SpringTemplateEngine engine = new SpringTemplateEngine();
+		engine.setTemplateResolver(templateResolver());
+		Set<IDialect> dialect = new HashSet<>();
+		dialect.add(new SpringSecurityDialect());
+		engine.setAdditionalDialects(dialect);
+		return engine;
+	}
+
+	@Bean
+	public ThymeleafViewResolver thymeleafViewResolver() {
+		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+		resolver.setTemplateEngine(templateEngine());
 		return resolver;
 	}
 
